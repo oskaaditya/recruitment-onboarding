@@ -230,7 +230,7 @@ export function LiveBrandingPreview() {
         }}
       >
         <h1 
-          className="text-3xl sm:text-5xl lg:text-6xl font-extrabold mb-4 sm:mb-6 transition-transform duration-300 hover:scale-105"
+          className="text-3xl font-semibold mb-4 sm:mb-6 transition-transform duration-300 hover:scale-105"
         >
           {data.companyName || "Your Company Name"}
         </h1>

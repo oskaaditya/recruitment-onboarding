@@ -93,7 +93,7 @@ export function WebsitePreview() {
         >
           <h1 
             // Responsive font size: 3xl on small, 5xl on medium, 6xl on large
-            className="text-3xl sm:text-5xl lg:text-6xl font-extrabold mb-4 sm:mb-6 transition-transform duration-300"
+            className="text-3xl font-semibold mb-4 sm:mb-6 transition-transform duration-300"
           >
             {data.companyName || "Your Company Name"}
           </h1>
