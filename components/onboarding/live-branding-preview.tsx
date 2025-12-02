@@ -1,9 +1,17 @@
 "use client"
 
 import { useOnboardingStore } from "@/lib/store"
+import { Button } from "@/components/ui/button"
+import { useState } from "react"
 
 export function LiveBrandingPreview() {
   const { data } = useOnboardingStore()
+  const [buttonClicked, setButtonClicked] = useState(false)
+
+  const handleButtonClick = () => {
+    setButtonClicked(true)
+    setTimeout(() => setButtonClicked(false), 200)
+  }
 
   const getFontFamily = () => {
     switch (data.fontStyle) {
@@ -34,6 +42,25 @@ export function LiveBrandingPreview() {
         return "0.5rem"
     }
   }
+
+  const getAestheticStyles = () => {
+    switch (data.brandAesthetic) {
+      case "modern":
+        return { borderRadius: "0.75rem", spacing: "2rem" }
+      case "corporate":
+        return { borderRadius: "0.375rem", spacing: "1.5rem" }
+      case "playful":
+        return { borderRadius: "1.25rem", spacing: "2.5rem" }
+      case "minimal":
+        return { borderRadius: "0", spacing: "1rem" }
+      default:
+        return { borderRadius: "0.75rem", spacing: "2rem" }
+    }
+  }
+
+  const styles = getAestheticStyles()
+  const primaryColor = data.primaryColor || "#3b82f6"
+  const secondaryColor = data.secondaryColor || "#9ca3af"
 
   return (
     <div
@@ -194,20 +221,40 @@ export function LiveBrandingPreview() {
       </div>
 
       {/* Hero Section Preview */}
-      <div
-        className="p-6 text-center"
+      <section
+        className="py-12 md:py-20 px-6 text-center shadow-xl transition-all duration-500 hover:shadow-2xl"
         style={{
-          background: `linear-gradient(135deg, ${data.primaryColor}15 0%, ${data.secondaryColor}15 100%)`,
-          borderRadius: getBorderRadius(),
+          background: `linear-gradient(135deg, ${primaryColor} 0%, ${secondaryColor} 100%)`,
+          color: "#ffffff",
+          borderRadius: styles.borderRadius,
         }}
       >
-        <div className="text-lg font-bold mb-1" style={{ color: data.primaryColor }}>
-          {data.companyName || "Welcome"}
-        </div>
+        <h1 
+          className="text-3xl sm:text-5xl lg:text-6xl font-extrabold mb-4 sm:mb-6 transition-transform duration-300 hover:scale-105"
+        >
+          {data.companyName || "Your Company Name"}
+        </h1>
         {data.tagline && (
-          <div className="text-xs text-muted-foreground">{data.tagline}</div>
+          <p 
+            className="text-base sm:text-xl mb-8 sm:mb-10 max-w-3xl mx-auto opacity-90"
+          >
+            {data.tagline}
+          </p>
         )}
-      </div>
+        <Button
+          size="lg"
+          onClick={handleButtonClick}
+          className="font-semibold transition-all duration-300 hover:scale-105 hover:shadow-2xl active:scale-95 cursor-pointer"
+          style={{
+            backgroundColor: "#ffffff",
+            color: primaryColor,
+            borderRadius: styles.borderRadius,
+            transform: buttonClicked ? "scale(0.95)" : undefined,
+          }}
+        >
+          Get Started
+        </Button>
+      </section>
     </div>
   )
 }

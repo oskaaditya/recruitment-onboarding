@@ -38,7 +38,7 @@ export function StepBrandStyle() {
             {brandAesthetics.map((aesthetic) => (
               <Card
                 key={aesthetic.value}
-                className={`cursor-pointer transition-all hover:border-primary ${
+                className={`cursor-pointer p-0 transition-all hover:border-primary ${
                   data.brandAesthetic === aesthetic.value
                     ? "border-primary border-2"
                     : ""
@@ -56,7 +56,7 @@ export function StepBrandStyle() {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-6">
+        <div className="grid lg:grid-cols-2 gap-6">
           <div className="space-y-2">
             <Label htmlFor="primary-color">Primary Color</Label>
             <div className="flex gap-2">
@@ -108,7 +108,7 @@ export function StepBrandStyle() {
 
         <div>
           <Label className="text-base font-medium mb-3 block">Font Style</Label>
-          <div className="grid grid-cols-4 gap-4">
+          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
             {fontStyles.map((font) => (
               <Card
                 key={font.value}

@@ -190,7 +190,7 @@ export function StepReview() {
         }
       `}} />
       <div className="space-y-6">
-        <div className="flex items-center justify-between">
+        <div className="flex flex-col md:flex-row items-start md:items-center gap-2 justify-between">
           <div>
             <h2 className="text-2xl font-semibold">Review & Confirm</h2>
             <p className="text-muted-foreground mt-1">
@@ -232,20 +232,20 @@ export function StepReview() {
               </Button>
             </div>
           </CardHeader>
-          <CardContent className="space-y-2">
-            <div className="flex items-center justify-between">
+          <CardContent className="flex flex-col space-y-2">
+            <div className="flex flex-col gap-2">
               <div className="text-sm font-medium">Company Name</div>
               <div className="text-sm text-muted-foreground">
                 {data.companyName || "Not set"}
               </div>
             </div>
             {data.tagline && (
-              <div className="flex items-center justify-between">
+              <div className="flex flex-col gap-2">
                 <div className="text-sm font-medium">Tagline</div>
                 <div className="text-sm text-muted-foreground">{data.tagline}</div>
               </div>
             )}
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col gap-2">
               <div className="text-sm font-medium">Industry</div>
               <div className="text-sm text-muted-foreground">
                 {data.industry || "Not set"}
@@ -271,14 +271,14 @@ export function StepReview() {
               </Button>
             </div>
           </CardHeader>
-          <CardContent className="space-y-2">
-            <div className="flex items-center justify-between">
+          <CardContent className="flex flex-col space-y-2">
+            <div className="flex flex-col gap-2">
               <div className="text-sm font-medium">Aesthetic</div>
               <div className="text-sm text-muted-foreground capitalize">
                 {data.brandAesthetic}
               </div>
             </div>
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col gap-2">
               <div className="text-sm font-medium">Primary Color</div>
               <div className="flex items-center gap-2">
                 <div
@@ -288,7 +288,7 @@ export function StepReview() {
                 <div className="text-sm text-muted-foreground">{data.primaryColor}</div>
               </div>
             </div>
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col gap-2">
               <div className="text-sm font-medium">Secondary Color</div>
               <div className="flex items-center gap-2">
                 <div
@@ -298,7 +298,7 @@ export function StepReview() {
                 <div className="text-sm text-muted-foreground">{data.secondaryColor}</div>
               </div>
             </div>
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col gap-2">
               <div className="text-sm font-medium">Font Style</div>
               <div className="text-sm text-muted-foreground capitalize">
                 {data.fontStyle}
@@ -325,13 +325,13 @@ export function StepReview() {
             </div>
           </CardHeader>
           <CardContent className="space-y-2">
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col gap-2">
               <div className="text-sm font-medium">Links</div>
               <div className="text-sm text-muted-foreground">
                 {data.inspirationLinks.length} link(s)
               </div>
             </div>
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col gap-2">
               <div className="text-sm font-medium">Images</div>
               <div className="text-sm text-muted-foreground">
                 {data.inspirationImages.length} image(s)
@@ -354,7 +354,7 @@ export function StepReview() {
 
         <Card className="print-card">
           <CardHeader>
-            <div className="flex items-center justify-between">
+            <div className="flex flex-col md:flex-row items-start md:items-center gap-2 justify-between">
               <div>
                 <CardTitle>One-Page Website Preview</CardTitle>
                 <CardDescription>Preview your generated website</CardDescription>
@@ -367,7 +367,7 @@ export function StepReview() {
               </Link>
             </div>
           </CardHeader>
-          <CardContent>
+          <CardContent className="p-1">
             <WebsitePreview />
           </CardContent>
         </Card>

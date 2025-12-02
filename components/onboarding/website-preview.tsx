@@ -3,8 +3,8 @@
 import { useOnboardingStore } from "@/lib/store"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { Separator } from "@/components/ui/separator"
 import { useState } from "react"
+import { Users, UserSearch, Lightbulb } from "lucide-react"
 
 /**
  * Renders a website preview based on user's onboarding data.
@@ -93,7 +93,7 @@ export function WebsitePreview() {
         >
           <h1 
             // Responsive font size: 3xl on small, 5xl on medium, 6xl on large
-            className="text-3xl sm:text-5xl lg:text-6xl font-extrabold mb-4 sm:mb-6 transition-transform duration-300 hover:scale-105"
+            className="text-3xl sm:text-5xl lg:text-6xl font-extrabold mb-4 sm:mb-6 transition-transform duration-300"
           >
             {data.companyName || "Your Company Name"}
           </h1>
@@ -119,13 +119,11 @@ export function WebsitePreview() {
             Get Started
           </Button>
         </section>
-
-        <Separator className="bg-gray-200/50" />
         
         {/* About Section */}
         <section className="px-0 sm:px-6">
           <h2 className="text-2xl sm:text-3xl font-bold mb-4" style={{ color: primaryColor }}>
-            About Us 👋
+            About Us
           </h2>
           <p className="text-sm sm:text-base text-muted-foreground leading-relaxed max-w-4xl">
             {data.companyName || "We"} are a leading recruitment company specializing in{" "}
@@ -136,53 +134,64 @@ export function WebsitePreview() {
           </p>
         </section>
 
-        <Separator className="bg-gray-200/50" />
-
         {/* Services Section */}
         <section className="px-0 sm:px-6">
-          <h2 className="text-2xl sm:text-3xl font-bold mb-6" style={{ color: primaryColor }}>
-            Our Services 🚀
-          </h2>
+          <div className="flex flex-col items-start gap-2 justify-between mb-6">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-3" style={{ color: primaryColor }}>
+              Our Services
+            </h2>
+            <p className="text-sm sm:text-base text-muted-foreground max-w-xl">
+              Comprehensive recruitment solutions tailored to your needs, leveraging cutting-edge technology and a vast network of professionals.
+            </p>
+          </div>
           <div 
             // Responsive Grid: 1 column on small, 2 on medium, 3 on large
             className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8"
           >
-            {["Talent Acquisition", "Executive Search", "Consulting"].map(
-              (service, index) => (
-                <Card
-                  key={index}
-                  onMouseEnter={() => setHoveredCard(index)}
-                  onMouseLeave={() => setHoveredCard(null)}
-                  onClick={() => handleButtonClick(service)}
-                  className="shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer group p-0!"
-                  style={{
-                    borderRadius: styles.borderRadius,
-                    borderColor: hoveredCard === index ? primaryColor : secondaryColor + "33",
-                    borderWidth: hoveredCard === index ? "2px" : "1px",
-                    transform: hoveredCard === index ? "translateY(-4px) scale(1.02)" : "translateY(0) scale(1)",
-                  }}
-                >
-                  <CardContent className="p-5 sm:p-6">
-                    <div
-                      className="text-xl sm:text-2xl font-semibold mb-2 transition-colors duration-300"
-                      style={{ 
+            {[
+              { name: "Talent Acquisition", icon: Users },
+              { name: "Executive Search", icon: UserSearch },
+              { name: "Consulting", icon: Lightbulb },
+            ].map(
+              (service, index) => {
+                const IconComponent = service.icon
+                return (
+                  <Card
+                    key={index}
+                    onMouseEnter={() => setHoveredCard(index)}
+                    onMouseLeave={() => setHoveredCard(null)}
+                    onClick={() => handleButtonClick(service.name)}
+                    className="shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer group p-0!"
+                    style={{
+                      borderRadius: styles.borderRadius,
+                      borderColor: hoveredCard === index ? primaryColor : secondaryColor + "33",
+                    }}
+                  >
+                    <CardContent className="p-5 sm:p-6">
+                      <div className="mb-4 transition-transform duration-300" style={{ 
                         color: hoveredCard === index ? primaryColor : primaryColor,
-                      }}
-                    >
-                      {service}
-                    </div>
-                    <p className="text-xs sm:text-sm text-muted-foreground transition-opacity duration-300">
-                      Comprehensive {service.toLowerCase()} solutions tailored to
-                      your needs, leveraging cutting-edge technology and a vast network of professionals.
-                    </p>
-                  </CardContent>
-                </Card>
-              )
+                      }}>
+                        <IconComponent className="w-8 h-8 sm:w-10 sm:h-10" />
+                      </div>
+                      <div
+                        className="text-xl font-semibold mb-2 transition-colors duration-300"
+                        style={{ 
+                          color: hoveredCard === index ? primaryColor : primaryColor,
+                        }}
+                      >
+                        {service.name}
+                      </div>
+                      <p className="text-xs sm:text-sm text-muted-foreground transition-opacity duration-300">
+                        Comprehensive {service.name.toLowerCase()} solutions tailored to
+                        your needs, leveraging cutting-edge technology and a vast network of professionals.
+                      </p>
+                    </CardContent>
+                  </Card>
+                )
+              }
             )}
           </div>
         </section>
-
-        <Separator className="bg-gray-200/50" />
 
         {/* Contact Section */}
         <section
@@ -194,12 +203,12 @@ export function WebsitePreview() {
           }}
         >
           <h2 className="text-2xl sm:text-3xl font-bold mb-6" style={{ color: primaryColor }}>
-            Get In Touch 📞
+            Get In Touch
           </h2>
-          <div className="flex flex-col sm:flex-row sm:space-x-12 space-y-4 sm:space-y-0">
+          <div className="flex flex-col space-y-4">
             <div className="space-y-4">
               <div 
-                className="group cursor-pointer transition-all duration-300 hover:translate-x-1"
+                className="group cursor-pointer transition-all duration-300 "
                 onClick={() => handleButtonClick("Email")}
               >
                 <div className="font-medium text-lg mb-1 transition-colors duration-300 group-hover:opacity-80" style={{ color: primaryColor }}>
@@ -214,7 +223,7 @@ export function WebsitePreview() {
                 </a>
               </div>
               <div 
-                className="group cursor-pointer transition-all duration-300 hover:translate-x-1"
+                className="group cursor-pointer transition-all duration-300 "
                 onClick={() => handleButtonClick("Phone")}
               >
                 <div className="font-medium text-lg mb-1 transition-colors duration-300 group-hover:opacity-80" style={{ color: primaryColor }}>
